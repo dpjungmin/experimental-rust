@@ -82,7 +82,8 @@ impl CircuitBreaker {
                 Ok(x)
             }
             Err(e) => {
-                *state = State::Open(Instant::now() + self.reset_timeout);
+                let reset_time = Instant::now() + self.reset_timeout;
+                *state = State::Open(reset_time);
                 Err(CircuitBreakerError::OperationError(e))
             }
         }

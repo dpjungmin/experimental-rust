@@ -43,7 +43,7 @@ async fn main() {
 
             match e {
                 CircuitBreakerError::OpenCircuit => {
-                    // eprintln!("{key} (open circuit)")
+                    eprintln!("{key} (open circuit)")
                 }
                 CircuitBreakerError::OperationError(_) => {
                     eprintln!("{key} (operation error)");
