@@ -32,7 +32,7 @@ impl CircuitBreaker {
 
     pub async fn try_call<F, T, E>(&self, f: F) -> Result<T, CircuitBreakerError<E>>
     where
-        F: Fn() -> Result<T, E> + Send,
+        F: FnOnce() -> Result<T, E> + Send,
         T: Send,
     {
         let mut state = self.state.lock().await;
@@ -70,7 +70,7 @@ impl CircuitBreaker {
 
     async fn try_again<F, T, E>(&self, f: F) -> Result<T, CircuitBreakerError<E>>
     where
-        F: Fn() -> Result<T, E> + Send,
+        F: FnOnce() -> Result<T, E> + Send,
         T: Send,
     {
         let mut state = self.state.lock().await;

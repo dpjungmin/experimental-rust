@@ -47,7 +47,7 @@ impl CircuitBreakerManager {
     ) -> Result<T, CircuitBreakerManagerError<E>>
     where
         K: Hash + ?Sized,
-        F: Fn() -> Result<T, E> + Send,
+        F: FnOnce() -> Result<T, E> + Send,
         T: Send,
     {
         let hashed_key = self.compute_key(key);
